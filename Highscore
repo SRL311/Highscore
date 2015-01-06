@@ -1,0 +1,250 @@
+import UIKit
+import iAd
+
+class HighScore: ViewController, ADBannerViewDelegate {
+    
+    @IBOutlet weak var HighscoreLabel: UILabel!
+    @IBOutlet weak var SecondHighscoreLabel: UILabel!
+    @IBOutlet weak var ThirdHighscoreLabel: UILabel!
+    @IBOutlet weak var FourthHighscoreLabel: UILabel!
+    @IBOutlet weak var FifthHighscoreLabel: UILabel!
+    @IBOutlet weak var Scorelabel: UILabel!
+    @IBOutlet weak var Button_1: UIButton!
+    @IBOutlet weak var Button_2: UIButton!
+    @IBOutlet weak var Button_3: UIButton!
+    @IBOutlet weak var Button_4: UIButton!
+    @IBOutlet weak var Button_5: UIButton!
+    @IBOutlet weak var Button_6: UIButton!
+    @IBOutlet weak var Button_7: UIButton!
+    @IBOutlet weak var Button_8: UIButton!
+    @IBOutlet weak var Button_9: UIButton!
+    @IBOutlet weak var Button_10: UIButton!
+    @IBOutlet weak var Button_11: UIButton!
+    @IBOutlet weak var Button_12: UIButton!
+    @IBOutlet weak var Button_13: UIButton!
+    @IBOutlet weak var Button_14: UIButton!
+    @IBOutlet weak var Button_15: UIButton!
+    @IBOutlet weak var Button_16: UIButton!
+    
+    
+    override func viewDidLoad() {
+        
+        
+        let defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        Score = defaults.valueForKey("Score")?.integerValue ?? 0
+        
+        var Highscore = defaults.integerForKey("Highscore")
+        
+        var Highscore2 = defaults.integerForKey("Highscore2")
+        
+        var Highscore3 = defaults.integerForKey("Highscore3")
+        
+        var Highscore4 = defaults.integerForKey("Highscore4")
+        
+        var Highscore5 = defaults.integerForKey("Highscore5")
+        
+        
+            ScoreString = String(Score)
+            Scorelabel.text = ScoreString
+        if Score <= Highscore5 {
+
+                HighscoreString = String(Highscore)
+                HighscoreLabel.text = HighscoreString
+                Highscore2String = String(Highscore2)
+                SecondHighscoreLabel.text = Highscore2String
+                Highscore3String = String(Highscore3)
+                ThirdHighscoreLabel.text = Highscore3String
+                Highscore4String = String(Highscore4)
+                FourthHighscoreLabel.text = Highscore4String
+                Highscore5String = String(Highscore5)
+                FifthHighscoreLabel.text = Highscore5String
+        }
+       else if Score > Highscore {
+        
+        FourToFive()
+        
+        ThreeToFour()
+        
+        TwoToThree()
+        
+        OneToTwo()
+        
+        ScoreToOne()
+        
+        
+        }
+        else if Score > Highscore2 {
+        
+        FourToFive()
+        
+        ThreeToFour()
+        
+        TwoToThree()
+        
+        ScoreToTwo()
+        
+        HighscoreString = String(Highscore)
+        HighscoreLabel.text = HighscoreString
+            
+        }
+       else if Score > Highscore3 {
+        
+        FourToFive()
+        
+        ThreeToFour()
+        
+        ScoreToThree()
+        
+        HighscoreString = String(Highscore)
+        HighscoreLabel.text = HighscoreString
+        Highscore2String = String(Highscore2)
+        SecondHighscoreLabel.text = Highscore2String
+        
+       }
+       else if Score > Highscore4 {
+        
+        FourToFive()
+        
+        ScoreToFour()
+        
+        HighscoreString = String(Highscore)
+        HighscoreLabel.text = HighscoreString
+        Highscore2String = String(Highscore2)
+        SecondHighscoreLabel.text = Highscore2String
+        Highscore3String = String(Highscore3)
+        ThirdHighscoreLabel.text = Highscore3String
+        
+       }
+       else if Score > Highscore5 {
+        
+    ScoreToFive()
+        
+        HighscoreString = String(Highscore)
+        HighscoreLabel.text = HighscoreString
+        Highscore2String = String(Highscore2)
+        SecondHighscoreLabel.text = Highscore2String
+        Highscore3String = String(Highscore3)
+        ThirdHighscoreLabel.text = Highscore3String
+        Highscore4String = String(Highscore4)
+        FourthHighscoreLabel.text = Highscore4String
+        
+        }
+       
+        
+        Button_1.backgroundColor = UIColor.redColor()
+        Button_3.backgroundColor = UIColor.redColor()
+        Button_6.backgroundColor = UIColor.redColor()
+        Button_8.backgroundColor = UIColor.redColor()
+        Button_9.backgroundColor = UIColor.redColor()
+        Button_11.backgroundColor = UIColor.redColor()
+        Button_14.backgroundColor = UIColor.redColor()
+        Button_16.backgroundColor = UIColor.redColor()
+        
+        Button_2.backgroundColor = UIColor.blueColor()
+        Button_4.backgroundColor = UIColor.blueColor()
+        Button_5.backgroundColor = UIColor.blueColor()
+        Button_7.backgroundColor = UIColor.blueColor()
+        Button_10.backgroundColor = UIColor.blueColor()
+        Button_12.backgroundColor = UIColor.blueColor()
+        Button_13.backgroundColor = UIColor.blueColor()
+        Button_15.backgroundColor = UIColor.blueColor()
+
+    }
+    @IBAction func Backpress(sender: UIButton) {
+        Score = 0
+        ScoreString = String(Score)
+        Scorelabel.text = ScoreString
+        let defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        defaults.setObject(Highscore, forKey: "Highscore")
+        defaults.synchronize()
+        let controller = storyboard?.instantiateViewControllerWithIdentifier("Main") as Main
+        presentViewController(controller, animated: true, completion: nil)
+    }
+    func ScoreToFive() {
+
+        let defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        Highscore5 = defaults.valueForKey("Highscore5")?.integerValue ?? 0
+        defaults.setInteger(Score, forKey: "Highscore5")
+        defaults.synchronize()
+        Highscore5String = String(Highscore5)
+        FifthHighscoreLabel.text = Highscore5String
+    }
+    
+    func FourToFive() {
+        let defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        Highscore5 = defaults.valueForKey("Highscore5")?.integerValue ?? 0
+        Highscore4 = defaults.valueForKey("Highscore4")?.integerValue ?? 0
+        defaults.setInteger(Highscore4, forKey: "Highscore5")
+        defaults.synchronize()
+        Highscore5String = String(Highscore5)
+        FifthHighscoreLabel.text = Highscore5String
+    }
+    
+    func ScoreToFour() {
+        let defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        Highscore4 = defaults.valueForKey("Highscore4")?.integerValue ?? 0
+        defaults.setInteger(Score, forKey: "Highscore4")
+        defaults.synchronize()
+        Highscore4String = String(Highscore4)
+        FourthHighscoreLabel.text = Highscore4String
+    }
+    
+    func ThreeToFour() {
+        let defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        Highscore4 = defaults.valueForKey("Highscore4")?.integerValue ?? 0
+        Highscore3 = defaults.valueForKey("Highscore3")?.integerValue ?? 0
+        defaults.setInteger(Highscore3, forKey: "Highscore4")
+        defaults.synchronize()
+        Highscore4String = String(Highscore4)
+        FourthHighscoreLabel.text = Highscore4String
+    }
+    
+    func ScoreToThree() {
+        let defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        Highscore3 = defaults.valueForKey("Highscore3")?.integerValue ?? 0
+        defaults.setInteger(Score, forKey: "Highscore3")
+        defaults.synchronize()
+        Highscore3String = String(Highscore3)
+        ThirdHighscoreLabel.text = Highscore3String
+    }
+    
+    func TwoToThree() {
+        let defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        Highscore3 = defaults.valueForKey("Highscore3")?.integerValue ?? 0
+        Highscore2 = defaults.valueForKey("Highscore2")?.integerValue ?? 0
+        defaults.setInteger(Highscore2, forKey: "Highscore3")
+        defaults.synchronize()
+        Highscore3String = String(Highscore3)
+        ThirdHighscoreLabel.text = Highscore3String
+
+    }
+    
+    func ScoreToTwo() {
+        let defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        Highscore2 = defaults.valueForKey("Highscore2")?.integerValue ?? 0
+        defaults.setInteger(Score, forKey: "Highscore2")
+        defaults.synchronize()
+        Highscore2String = String(Highscore2)
+        SecondHighscoreLabel.text = Highscore2String
+    }
+    
+    func OneToTwo() {
+        let defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        Highscore2 = defaults.valueForKey("Highscore2")?.integerValue ?? 0
+        Highscore = defaults.valueForKey("Highscore")?.integerValue ?? 0
+        defaults.setInteger(Highscore, forKey: "Highscore2")
+        defaults.synchronize()
+        Highscore2String = String(Highscore2)
+        SecondHighscoreLabel.text = Highscore2String
+    }
+    
+    func ScoreToOne() {
+        let defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        Highscore = defaults.valueForKey("Highscore")?.integerValue ?? 0
+        defaults.setInteger(Score, forKey: "Highscore")
+        defaults.synchronize()
+        HighscoreString = String(Highscore)
+        HighscoreLabel.text = HighscoreString
+    }
+}
+
